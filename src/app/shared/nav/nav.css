@@ -14,12 +14,13 @@
 }
 
 .logo {
-    width: 70px;
+    width: 100px  ;
+    position: relative;
+    left: 30px;
 }
 
 .logo img {
-    max-width: 100%;
-    border-radius: 47%;
+    max-width: 55%; 
     cursor: pointer;
 }
 

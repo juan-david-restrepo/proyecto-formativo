@@ -1,10 +1,24 @@
     
 <app-nav></app-nav>
-    <header class="interfaz">
-        <h1>"La seguridad vial empieza contigo. <br> 
-            Reporta, participa, mejora tu ciudad."</h1>
-      
+    <header class="interfaz" [style.backgroundImage]="'url(' + carouselItems[currentIndex].imagen + ')'">
+          <div class="carousel-content" [class.fade]="fade">
+                <h1>{{ carouselItems[currentIndex].titulo }}</h1>
+                <button
+                class="carousel-button"
+                [routerLink]="carouselItems[currentIndex].direccion">
+                {{ carouselItems[currentIndex].boton }}
+                </button>
+            </div>
+
+        <div class="carousel-controls">
+            <button (click)="prevImage()">&#10094;</button>
+            <button (click)="nextImage()">&#10095;</button>
+        </div>
+
+
+
     </header>
+    
     <div class="container">
     <div class="title">Módulos y Servicios</div>
     <div class="modules">

@@ -32,7 +32,6 @@
 .registro-info img {
   max-width: 200px;
   margin-bottom: 20px;
-  border-radius: 50%;
 }
 
 .registro-info h2 {
@@ -56,7 +55,7 @@
 }
 
 h2 {
-  color: #007BFF;
+  color: #ffffff;
   text-align: center;
   margin-bottom: 30px;
 }
@@ -198,7 +197,7 @@ select {
 }
 
 .btn-facebook {
-  background-color: #1877f2;
+  background-color: #5096f1;
 }
 
 .btn-facebook:hover {
