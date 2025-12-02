@@ -8,6 +8,8 @@ import { SubirReporteComponent } from './components/subir-reporte/subir-reporte'
 import { Parking } from './components/parking/parking';
 import { Agente } from './components/agente/agente';
 import { Footer } from './shared/footer/footer';
+import { Soporte } from './components/soporte/soporte';
+
 
 export const routes: Routes = [
     {path: '', component: Home},
@@ -18,5 +20,6 @@ export const routes: Routes = [
     {path: 'subir-reporte', component: SubirReporteComponent},
     {path: 'parking', component: Parking},
     {path: 'agente', component: Agente},
-    {path: 'footer', component: Footer}
+    {path: 'footer', component: Footer},
+    {path: 'soporte', component: Soporte}
 ];

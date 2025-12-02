@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
   selector: 'app-nav',
-  imports: [RouterLink, CommonModule, ModalComponent],
   standalone: true,
+  imports: [RouterModule, CommonModule, ModalComponent],
   templateUrl: './nav.html',
-  styleUrl: './nav.css',
+  styleUrls: ['./nav.css']
 })
 export class Nav  {
   isSidebarOpen = false;
@@ -34,8 +34,7 @@ export class Nav  {
 
   isLoggedIn = false;
 
-ngOnInit() {
-  this.isLoggedIn = localStorage.getItem('user') !== null;
-}
-
+  ngOnInit() {
+    this.isLoggedIn = localStorage.getItem('user') !== null;
+  }
 }
