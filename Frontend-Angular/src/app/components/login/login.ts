@@ -3,6 +3,7 @@ import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Nav } from '../../shared/nav/nav';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
 import Swal from 'sweetalert2';
 
 declare const google: any;
@@ -17,7 +18,11 @@ declare const google: any;
 export class Login implements OnInit {
   formLogin: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.formLogin = this.fb.group({
       rol: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -31,7 +36,11 @@ export class Login implements OnInit {
 
   private initializeGoogleSDK(): void {
     const checkGoogle = () => {
-      if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) {
+      if (
+        typeof google === 'undefined' ||
+        !google.accounts ||
+        !google.accounts.oauth2
+      ) {
         console.warn('Esperando a que cargue el SDK de Google...');
         setTimeout(checkGoogle, 500);
         return;
@@ -44,7 +53,11 @@ export class Login implements OnInit {
   }
 
   iniciarConGoogle(): void {
-    if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) {
+    if (
+      typeof google === 'undefined' ||
+      !google.accounts ||
+      !google.accounts.oauth2
+    ) {
       console.error('SDK de Google aún no está disponible');
       return;
     }
@@ -52,12 +65,13 @@ export class Login implements OnInit {
     console.log('Abriendo ventana grande de inicio de sesión de Google...');
 
     const client = google.accounts.oauth2.initTokenClient({
-      client_id: '216216637079-tj6kkvojlq8d4rvjnucsmoov9d7lv8m0.apps.googleusercontent.com',
+      client_id:
+        '216216637079-tj6kkvojlq8d4rvjnucsmoov9d7lv8m0.apps.googleusercontent.com',
       scope: 'openid profile email',
       callback: (tokenResponse: any) => {
         console.log('Token recibido:', tokenResponse);
         this.obtenerDatosUsuario(tokenResponse.access_token);
-      }
+      },
     });
 
     client.requestAccessToken();
@@ -99,39 +113,40 @@ export class Login implements OnInit {
         icon: 'warning',
         title: 'Formulario incompleto',
         text: 'Por favor completa todos los campos correctamente.',
-        confirmButtonText: 'Entendido',
       });
       return;
     }
 
-    const { rol, email, password } = this.formLogin.value;
-    if (!rol) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Selecciona un rol',
-        text: 'Debes seleccionar tu tipo de usuario para continuar.',
-        confirmButtonText: 'Entendido',
-      });
-      return;
-    }
+    const { email, password } = this.formLogin.value;
 
-    localStorage.setItem('usuario', JSON.stringify({ rol, email, password }));
+    this.authService.login(email, password).subscribe({
+      next: (resp) => {
+        console.log('Respuesta del backend:', resp);
 
-    Swal.fire({
-      icon: 'success',
-      title: `Bienvenido, ${rol.charAt(0).toUpperCase() + rol.slice(1)}!`,
-      text: 'Redirigiendo a tu panel...',
-      showConfirmButton: false,
-      timer: 1800,
-      timerProgressBar: true,
-    }).then(() => {
-      if (rol === 'administrador') {
-        this.router.navigate(['/admin']);
-      } else if (rol === 'agente') {
-        this.router.navigate(['/agente']);
-      } else {
-        this.router.navigate(['/']);
-      }
+        localStorage.setItem('token', resp.token);
+        localStorage.setItem('userId', resp.userId);
+        localStorage.setItem('email', resp.email);
+        localStorage.setItem('role', resp.role);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Bienvenido!',
+          text: 'Inicio de sesión exitoso',
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error(err);
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al iniciar sesión',
+          text: err.error || 'Credenciales incorrectas',
+        });
+      },
     });
   }
 }

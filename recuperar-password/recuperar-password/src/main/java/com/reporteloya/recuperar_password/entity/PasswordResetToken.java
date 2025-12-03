@@ -20,7 +20,8 @@ public class PasswordResetToken {
     @Column(nullable = false)
     private LocalDateTime expirationDate;
 
-    public PasswordResetToken() {}
+    public PasswordResetToken() {
+    }
 
     public PasswordResetToken(String email, String token, LocalDateTime expirationDate) {
         this.email = email;
