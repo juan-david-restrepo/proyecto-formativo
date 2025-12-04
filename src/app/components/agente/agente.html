@@ -1,0 +1,68 @@
+<div class="sidebar">
+  <h2>Agente de Tránsito</h2>
+  <ul>
+    <li><a href="index.html"><i class='bx bx-home'></i> Inicio</a></li>
+    <li><a href="reportar.html"><i class='bx bx-alarm'></i> Reportar incidente</a></li>
+    <li><a href="infracciones.html"><i class='bx bx-traffic-cone'></i> Ver infracciones</a></li>
+    <li><a href="solicitudes.html"><i class='bx bx-task'></i> Solicitudes</a></li>
+    <li><a href="estadisticas.html"><i class='bx bx-bar-chart'></i> Estadísticas</a></li>
+    <li><a href="configuraciones.html"><i class='bx bx-cog'></i> Configuraciones</a></li>
+    <li><a href="index.html"><i class='bx bx-log-out'></i> Salir</a></li>
+  </ul>
+</div>
+
+<div class="main">
+  <div class="header">
+    <h1>Panel de Control del Agente</h1>
+    <input type="text" placeholder="Buscar...">
+  </div>
+
+  <div class="alert">
+    ⚠️ Alerta: hay 3 incidentes sin atender registrados en la última hora.
+  </div>
+
+  <div class="content">
+    <div class="card">
+      <h3>Incidentes reportados</h3>
+      <p>24 en las últimas 24 horas</p>
+    </div>
+    <div class="card">
+      <h3>Infracciones asignadas</h3>
+      <p>12 pendientes de validación</p>
+    </div>
+    <div class="card">
+      <h3>Solicitudes de ciudadanos</h3>
+      <p>5 nuevas solicitudes</p>
+    </div>
+    <div class="card">
+      <h3>Zona actual</h3>
+      <p>Centro - Calle 10 con Av. 6</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Gráfico de Incidentes</h3>
+    <!-- Aquí agregamos la referencia de Angular -->
+    <canvas #incidentChart></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Tabla de infracciones recientes</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Fecha</th>
+          <th>Tipo</th>
+          <th>Agente</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>03/07/2025</td><td>Velocidad</td><td>Gómez</td><td>Pendiente</td></tr>
+        <tr><td>2</td><td>03/07/2025</td><td>Semáforo</td><td>López</td><td>Validado</td></tr>
+        <tr><td>3</td><td>02/07/2025</td><td>Parqueo indebido</td><td>Martínez</td><td>Pendiente</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
