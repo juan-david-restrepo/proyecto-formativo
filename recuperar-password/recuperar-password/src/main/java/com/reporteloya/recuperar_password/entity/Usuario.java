@@ -45,7 +45,7 @@ public class Usuario implements UserDetails { // <<-- Implementar UserDetails es
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Retorna la lista de autoridades (roles) del usuario.
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     // Spring Security utiliza este método para obtener el nombre de usuario.

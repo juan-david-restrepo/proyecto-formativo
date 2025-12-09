@@ -53,7 +53,7 @@ public class AuthService {
 
                 // Asignación de Rol: forzamos `USER` por seguridad (ignorar rol enviado por
                 // cliente)
-                .role(Role.USER)
+                .role(Role.CIUDADANO)
                 .build();
 
         // 3. Guardar en la Base de Datos (manejo de posible duplicado por constraint)
