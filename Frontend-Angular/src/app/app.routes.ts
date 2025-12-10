@@ -10,19 +10,21 @@ import { Agente } from './components/agente/agente';
 import { Footer } from './shared/footer/footer';
 import { Soporte } from './components/soporte/soporte';
 import { PicoPlaca } from './components/pico-placa/pico-placa';
+import { Normas } from './components/normas/normas';
 
 
 export const routes: Routes = [
-    {path: '', component: Home},
-    {path: 'admin', component: AdminComponent},
-    {path: 'login', component: Login},
-    {path: 'recuperar', component: Recuperar},
-    {path: 'registro', component: Registro},
-    {path: 'subir-reporte', component: SubirReporteComponent},
-    {path: 'parking', component: Parking},
-    {path: 'agente', component: Agente},
-    {path: 'footer', component: Footer},
-    {path: 'soporte', component: Soporte},
-    {path: 'pico-placa', component: PicoPlaca}
-
+    { path: '', component: Home },
+    { path: 'home', component: Home },
+    { path: 'admin', component: AdminComponent },
+    { path: 'login', component: Login },
+    { path: 'recuperar', component: Recuperar },
+    { path: 'registro', component: Registro },
+    { path: 'subir-reporte', component: SubirReporteComponent },
+    { path: 'parking', component: Parking },
+    { path: 'agente', component: Agente },
+    { path: 'footer', component: Footer },
+    { path: 'soporte', component: Soporte },
+    { path: 'pico-placa', component: PicoPlaca },
+    { path: 'normas', component: Normas }
 ];
