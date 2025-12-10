@@ -17,4 +17,17 @@ export class AuthService {
   register(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, data);
   }
+
+  // ✅ NUEVO: Detecta si existe token en localStorage
+  isLogged(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  // Opcional: cerrar sesión
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    localStorage.removeItem('email');
+  }
 }

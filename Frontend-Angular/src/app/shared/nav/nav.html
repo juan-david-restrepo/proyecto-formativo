@@ -64,14 +64,23 @@
     </div>
 </div>
 
-        <div class="buttons">
-  <a routerLink="/login" class="button button-login" target="_self">Acceso</a>
-  <a routerLink="" class="button button-login" target="_blank">Contacto</a>
-  <a routerLink="" class="button button-signup" target="_blank">Inscribirse</a>
+ <div class="buttons">
 
-  <button id="sidebarToggle" class="toggle-btn" (click)="toggleSidebar()" *ngIf="isLoggedIn">
+  <!-- ❌ Ocultar cuando esté logueado -->
+  <a *ngIf="!isLoggedIn" routerLink="/login" class="button button-login">Acceso</a>
+  <a *ngIf="!isLoggedIn" routerLink="" class="button button-login">Contacto</a>
+  <a *ngIf="!isLoggedIn" routerLink="/registro" class="button button-signup">Inscribirse</a>
+
+  <!-- ✔ Mostrar cuando esté logueado -->
+  <button
+    id="sidebarToggle"
+    class="toggle-btn"
+    (click)="toggleSidebar()"
+    *ngIf="isLoggedIn"
+  >
     <i class="fas fa-bars"></i>
   </button>
+
 </div>
 
 <nav class="sidebar" [class.active]="isSidebarOpen">
@@ -90,7 +99,8 @@
       <li><i class="fas fa-user"></i> Perfil</li>
       <li><i class="fas fa-cog"></i> Configuración</li>
       <li><i class="fas fa-envelope"></i> Mensajes</li>
-      <li><i class="fas fa-sign-out-alt"></i> Salir</li>
+      <li (click)="logout()"><i class="fas fa-sign-out-alt"></i> Salir</li>
+
     </ul>
 
     <p>&copy; 2025 Reportelo Ya.</p>

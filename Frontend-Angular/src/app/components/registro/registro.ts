@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Nav } from '../../shared/nav/nav';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../service/auth.service';
-
-declare const google: any;
 
 @Component({
   selector: 'app-registro',
@@ -15,7 +18,7 @@ declare const google: any;
   templateUrl: './registro.html',
   styleUrls: ['./registro.css'],
 })
-export class Registro implements OnInit {
+export class Registro {
   registroForm: FormGroup;
 
   constructor(
@@ -23,98 +26,43 @@ export class Registro implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
+    // Formulario de registro
     this.registroForm = this.fb.group({
-      // Campos existentes
       nombre: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', Validators.required], // Nuevos campos requeridos por el backend/lógica
-      tipoDocumento: ['', Validators.required], // Ej: Cédula de Ciudadanía, Pasaporte
+      contrasena: ['', Validators.required],
+      tipoDocumento: ['', Validators.required],
       numeroDocumento: ['', Validators.required],
-      rol: ['Ciudadano', Validators.required], // Valor por defecto 'Ciudadano'
+      rol: ['Ciudadano', Validators.required],
     });
   }
 
-  ngOnInit() {
-    this.initializeGoogleSDK();
-  }
-
-  private initializeGoogleSDK(): void {
-    const checkGoogle = () => {
-      if (
-        typeof google === 'undefined' ||
-        !google.accounts ||
-        !google.accounts.oauth2
-      ) {
-        console.warn('Esperando a que cargue el SDK de Google...');
-        setTimeout(checkGoogle, 500);
-        return;
-      }
-      console.log('SDK de Google detectado y listo para OAuth2');
-    };
-    checkGoogle();
-  }
-
-  registrarConGoogle(): void {
-    if (
-      typeof google === 'undefined' ||
-      !google.accounts ||
-      !google.accounts.oauth2
-    ) {
-      console.error('SDK de Google aún no está disponible');
+  /** Redirección según rol */
+  private redirigirSegunRol(rol: string) {
+    if (!rol) {
+      this.router.navigate(['/home']);
       return;
     }
 
-    const client = google.accounts.oauth2.initTokenClient({
-      client_id:
-        '216216637079-tj6kkvojlq8d4rvjnucsmoov9d7lv8m0.apps.googleusercontent.com',
-      scope: 'openid profile email',
-      callback: (tokenResponse: any) => {
-        this.obtenerDatosUsuario(tokenResponse.access_token);
-      },
-    });
+    rol = rol.toUpperCase();
 
-    client.requestAccessToken();
-  }
-
-  private async obtenerDatosUsuario(accessToken: string) {
-    try {
-      const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
-      const data = await res.json();
-      console.log('Datos del usuario:', data);
-
-      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      usuarios.push({
-        nombre: data.name,
-        correo: data.email,
-        rol: 'usuario_google',
-      });
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-      // Dentro de private async obtenerDatosUsuario(accessToken: string) { ... }
-      // ...
-      Swal.fire({
-        icon: 'success',
-        title: `¡Bienvenido, ${data.name || 'usuario'}!`,
-        text: 'Registro exitoso con Google',
-        showConfirmButton: false,
-        timer: 1800,
-      }).then(() => {
-        // Aseguramos la navegación SOLO después de que el Swal se cierra (por timer)
-        this.router.navigate(['/dashboard']);
-      });
-      // ¡IMPORTANTE! Quita el 'this.router.navigate(['/dashboard']);' que estaba fuera del then().
-    } catch (error) {
-      console.error('Error al obtener la información del usuario:', error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error al registrar',
-        text: 'No se pudo obtener la información del usuario.',
-      });
+    switch (rol) {
+      case 'ADMIN':
+        this.router.navigate(['/admin']);
+        break;
+      case 'AGENTE':
+        this.router.navigate(['/agente']);
+        break;
+      case 'CIUDADANO':
+        this.router.navigate(['/home']);
+        break;
+      default:
+        this.router.navigate(['/home']);
+        break;
     }
   }
 
+  /** Enviar formulario */
   onSubmit(): void {
     if (this.registroForm.invalid) {
       Swal.fire({
@@ -125,41 +73,45 @@ export class Registro implements OnInit {
       return;
     }
 
-  const data = {
-    nombreCompleto: this.registroForm.value.nombre,
-    email: this.registroForm.value.correo,
-    password: this.registroForm.value.contrasena,
-    tipoDocumento: this.registroForm.value.tipoDocumento,
-    numeroDocumento: this.registroForm.value.numeroDocumento,
-    rol: this.registroForm.value.rol, // 'Ciudadano' por defecto
-  };
+    // Datos enviados al backend
+    const data = {
+      nombreCompleto: this.registroForm.value.nombre,
+      email: this.registroForm.value.correo,
+      password: this.registroForm.value.contrasena,
+      tipoDocumento: this.registroForm.value.tipoDocumento,
+      numeroDocumento: this.registroForm.value.numeroDocumento,
+      rol: this.registroForm.value.rol,
+    };
 
-this.authService.register(data).subscribe({
-  next: (resp: any) => {
-    // 1. **GUARDAR EL TOKEN (INICIO DE SESIÓN AUTOMÁTICO)**
-    if (resp && resp.token) {
-      localStorage.setItem('authToken', resp.token);
-      // Puedes guardar más info si es necesario, como resp.role
-      localStorage.setItem('userRole', resp.role);
-    }
+    this.authService.register(data).subscribe({
+      next: (resp) => {
+        // Guardar token e info del usuario
+        if (resp.token) {
+          localStorage.setItem('authToken', resp.token);
+        }
 
-    Swal.fire({
-      icon: 'success',
-      title: '¡Registro exitoso!',
-      timer: 1500,
-      showConfirmButton: false,
-    }).then(() => {
-      // 2. **REDIRECCIONAR A LA PÁGINA PRINCIPAL**
-      this.router.navigate(['/dashboard']); // <-- Redirige al dashboard
+        if (resp.role) {
+          localStorage.setItem('userRole', resp.role);
+        }
+
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro exitoso!',
+          timer: 1500,
+          showConfirmButton: false,
+        }).then(() => {
+          // 🔥 Redirección correcta según el rol
+          this.redirigirSegunRol(resp.role);
+        });
+      },
+
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar',
+          text: err.error || 'Hubo un problema durante el registro.',
+        });
+      },
     });
-  },
-  error: (err: any) => {
-    Swal.fire({
-      icon: 'error',
-      title: 'Error al registrar',
-      text: err.error || 'Hubo un problema',
-    });
-  },
-});
   }
 }
