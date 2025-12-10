@@ -10,6 +10,7 @@ import { Agente } from './components/agente/agente';
 import { Footer } from './shared/footer/footer';
 import { Soporte } from './components/soporte/soporte';
 import { PicoPlaca } from './components/pico-placa/pico-placa';
+import { Normas } from './components/normas/normas';
 
 
 export const routes: Routes = [

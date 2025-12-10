@@ -99,6 +99,12 @@
     margin: 2px 0;
 }
 
+.dropdown-section a{
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
 .buttons {
     display: flex;
     gap: 10px;
