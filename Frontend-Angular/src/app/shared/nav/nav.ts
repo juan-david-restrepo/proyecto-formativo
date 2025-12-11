@@ -15,11 +15,9 @@ export class Nav implements OnInit {
   isModalOpen = false;
   currentAvatar = 'assets/images/images (3).png';
 
-  // 🔥 ESTO CONTROLARÁ SI MOSTRAR O NO ACCESO / INSCRIBIRSE
   isLoggedIn = false;
 
   ngOnInit() {
-    // 🔥 VERIFICA SI EXISTE TOKEN REAL
     this.isLoggedIn = !!localStorage.getItem('token');
   }
 
@@ -40,7 +38,6 @@ export class Nav implements OnInit {
     this.isModalOpen = false;
   }
 
-  // 🔥 Cerrar sesión desde la barra lateral
   logout() {
     localStorage.clear();
     location.reload();

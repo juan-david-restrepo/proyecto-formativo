@@ -12,7 +12,6 @@ import { Soporte } from './components/soporte/soporte';
 import { PicoPlaca } from './components/pico-placa/pico-placa';
 import { Normas } from './components/normas/normas';
 
-
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'home', component: Home },
@@ -26,4 +25,6 @@ export const routes: Routes = [
   { path: 'footer', component: Footer },
   { path: 'soporte', component: Soporte },
   { path: 'pico-placa', component: PicoPlaca },
+  { path: 'normas', component: Normas },
+  { path: '**', redirectTo: '' }  // evita pantallas en blanco
 ];
