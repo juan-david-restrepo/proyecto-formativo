@@ -92,6 +92,10 @@ export class Registro {
           this.authService.setSession(resp.token);
         }
 
+        if (resp.userId) {
+          localStorage.setItem('userId', resp.userId);
+        }
+
 
         if (resp.role) {
           localStorage.setItem('userRole', resp.role);

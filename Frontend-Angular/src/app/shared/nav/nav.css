@@ -14,7 +14,7 @@
 }
 
 .logo {
-    width: 70px;
+    width: 50px;
 }
 
 .logo img {
@@ -79,9 +79,10 @@
 }
 
 .avatarnav{
-  width: 55px;
+  width: 45px;
   border-radius: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 30);
+  margin-right: 10px;
 }
 
 .menu-item-container:hover .dropdown {

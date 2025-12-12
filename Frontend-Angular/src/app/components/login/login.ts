@@ -55,6 +55,10 @@ export class Login {
           this.authService.setSession(resp.token);
         }
 
+        if (resp.userId) {
+          localStorage.setItem('userId', resp.userId);
+        }
+
 
         // Guardar sesión
        // localStorage.setItem('token', resp.token);
