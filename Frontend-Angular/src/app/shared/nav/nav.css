@@ -78,6 +78,12 @@
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
+.avatarnav{
+  width: 55px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 30);
+}
+
 .menu-item-container:hover .dropdown {
     visibility: visible;
     opacity: 1;
@@ -109,6 +115,7 @@
     display: flex;
     gap: 10px;
     margin-left: auto;
+    align-items: center;
 }
 
 .button {
@@ -123,6 +130,7 @@
 .button-login {
     color: #333;
     background-color: transparent;
+    height: 40px;
 }
 
 .button-login:hover {
@@ -132,6 +140,7 @@
 .button-signup {
     color: #fff;
     background-color: black;
+    height: 40px;
 }
 
 .button-signup:hover {

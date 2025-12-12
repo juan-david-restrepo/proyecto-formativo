@@ -86,9 +86,12 @@ export class Registro {
     this.authService.register(data).subscribe({
       next: (resp) => {
         // Guardar token e info del usuario
+        // 🔥 Guardar token y activar sesión
         if (resp.token) {
-          localStorage.setItem('authToken', resp.token);
+          localStorage.setItem('token', resp.token);
+          this.authService.setSession(resp.token);
         }
+
 
         if (resp.role) {
           localStorage.setItem('userRole', resp.role);

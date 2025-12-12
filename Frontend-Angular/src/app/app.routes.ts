@@ -1,3 +1,4 @@
+import { authGuard } from './guards/auth-guard';
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
 import { AdminComponent } from './components/admin/admin';
@@ -25,5 +26,5 @@ export const routes: Routes = [
   { path: 'agente', component: Agente },
   { path: 'footer', component: Footer },
   { path: 'soporte', component: Soporte },
-  { path: 'pico-placa', component: PicoPlaca },
+  { path: 'pico-placa', component: PicoPlaca},
 ];

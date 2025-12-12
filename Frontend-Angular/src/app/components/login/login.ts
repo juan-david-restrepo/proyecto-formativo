@@ -50,8 +50,14 @@ export class Login {
       next: (resp) => {
         console.log('Respuesta del backend:', resp);
 
+        if (resp.token) {
+          localStorage.setItem('token', resp.token);
+          this.authService.setSession(resp.token);
+        }
+
+
         // Guardar sesión
-        localStorage.setItem('token', resp.token);
+       // localStorage.setItem('token', resp.token);
         localStorage.setItem('userId', resp.userId);
         localStorage.setItem('email', resp.email);
         localStorage.setItem('role', resp.role);

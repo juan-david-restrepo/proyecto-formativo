@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -18,9 +19,13 @@ export class Nav implements OnInit {
   // 🔥 ESTO CONTROLARÁ SI MOSTRAR O NO ACCESO / INSCRIBIRSE
   isLoggedIn = false;
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit() {
     // 🔥 VERIFICA SI EXISTE TOKEN REAL
-    this.isLoggedIn = !!localStorage.getItem('token');
+      this.authService.authState$.subscribe(state => {
+      this.isLoggedIn = state;
+    });
   }
 
   toggleSidebar(): void {
@@ -42,7 +47,6 @@ export class Nav implements OnInit {
 
   // 🔥 Cerrar sesión desde la barra lateral
   logout() {
-    localStorage.clear();
-    location.reload();
+    this.authService.logout();
   }
 }
