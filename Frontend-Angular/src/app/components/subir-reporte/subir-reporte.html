@@ -1,0 +1,53 @@
+<app-nav></app-nav>
+
+<div class="container">
+  <h2>Reporte de Infracción</h2>
+
+  <form (ngSubmit)="enviarReporte()" #formReporte="ngForm">
+    
+    <!-- Archivos -->
+    <div class="campo">
+      <label>Foto o video del incidente (máximo 5):</label>
+      <input type="file" multiple (change)="onFileChange($event)" accept="image/*,video/*" required />
+      <div id="preview"></div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="campo">
+      <label>Descripción:</label>
+      <div class="grupo">
+        <textarea [(ngModel)]="descripcion" name="descripcion" rows="4" required></textarea>
+        <button type="button" class="btn-voice" (click)="iniciarVoz()">🎙️</button>
+      </div>
+    </div>
+
+    <!-- Fecha y hora -->
+    <div class="fila">
+      <div class="columna">
+        <label>Fecha:</label>
+        <input type="date" [(ngModel)]="fecha" name="fecha" required />
+      </div>
+      <div class="columna">
+        <label>Hora:</label>
+        <input type="time" [(ngModel)]="hora" name="hora" required />
+      </div>
+    </div>
+
+    <!-- Ubicación -->
+    <div class="campo">
+      <label>Ubicación:</label>
+      <button type="button" class="btn-ubicacion" (click)="obtenerUbicacion()">Obtener mi ubicación</button>
+      <input type="text" [(ngModel)]="direccion" name="direccion" placeholder="Dirección aproximada" />
+      <input type="text" [(ngModel)]="coordenadas" name="coordenadas" placeholder="Latitud, Longitud" />
+      <div id="map"></div>
+    </div>
+
+    <!-- Placa -->
+    <div class="campo">
+      <label>Placa del vehículo (opcional):</label>
+      <input type="text" [(ngModel)]="placa" name="placa" />
+    </div>
+
+    <button type="submit" class="btn-enviar">Enviar Reporte</button>
+  </form>
+</div>
