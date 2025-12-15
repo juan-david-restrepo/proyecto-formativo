@@ -24,7 +24,7 @@ export const routes: Routes = [
   { path: 'registro', component: Registro },
   { path: 'subir-reporte', component: SubirReporteComponent, canActivate: [authGuard] },
   { path: 'parking', component: Parking, canActivate: [authGuard] },
-  { path: 'agente', component: Agente, canActivate: [authGuard] },
+  { path: 'agente', component: Agente },
   { path: 'footer', component: Footer },
   { path: 'soporte', component: Soporte, canActivate: [authGuard] },
   { path: 'pico-placa', component: PicoPlaca},
