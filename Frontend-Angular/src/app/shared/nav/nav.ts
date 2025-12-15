@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { AuthService } from '../../service/auth.service';
+import { Avatar } from '../../service/avatar';
 
 @Component({
   selector: 'app-nav',
@@ -12,19 +13,29 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./nav.css'],
 })
 export class Nav implements OnInit {
+
   isSidebarOpen = false;
   isModalOpen = false;
   currentAvatar = 'assets/images/images (3).png';
-
-  // 🔥 ESTO CONTROLARÁ SI MOSTRAR O NO ACCESO / INSCRIBIRSE
   isLoggedIn = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private avatarService: Avatar
+  ) {}
 
   ngOnInit() {
-    // 🔥 VERIFICA SI EXISTE TOKEN REAL
-      this.authService.authState$.subscribe(state => {
+
+    // Estado de login
+    this.authService.authState$.subscribe(state => {
       this.isLoggedIn = state;
+    });
+
+    this.isLoggedIn = !!localStorage.getItem('token');
+
+    // 🔥 ESCUCHAR AVATAR GLOBAL
+    this.avatarService.avatar$.subscribe(avatar => {
+      this.currentAvatar = avatar;
     });
   }
 
@@ -40,12 +51,12 @@ export class Nav implements OnInit {
     this.isModalOpen = true;
   }
 
+  // 👉 CUANDO SE SELECCIONA AVATAR EN EL NAV
   onAvatarSelected(avatar: string) {
-    this.currentAvatar = avatar;
+    this.avatarService.setAvatar(avatar);
     this.isModalOpen = false;
   }
 
-  // 🔥 Cerrar sesión desde la barra lateral
   logout() {
     this.authService.logout();
   }

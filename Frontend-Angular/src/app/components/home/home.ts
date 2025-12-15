@@ -193,4 +193,6 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
   });
 }
 
+
+
 }
