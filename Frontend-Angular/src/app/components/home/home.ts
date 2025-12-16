@@ -127,8 +127,8 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
       image: 'assets/images/secundario.png',
       text: `"Reporta infracciones fácilmente.<br>
               Solo sube una foto o video."`,
-      buttonText: 'Ver',
-      buttonLink: '/estadisticas',
+      buttonText: 'Subir reporte',
+      buttonLink: '/subir-reporte',
     },
     {
       image: 'assets/images/Armenia.webp',

@@ -20,8 +20,8 @@ export class Perfil implements OnInit {
   constructor(private avatarService: Avatar) {}
 
   user = {
-    name: 'Miguel',
-    lastname: 'Reyes',
+    name: '',
+    lastname: '',
     email: 'miguel@example.com',
     phone: '',
     city: 'Armenia',
@@ -54,6 +54,6 @@ export class Perfil implements OnInit {
 
   saveProfile() {
     localStorage.setItem('userProfile', JSON.stringify(this.user));
-    alert('Cambios guardados correctamente ✔️');
+    alert('Cambios guardados correctamente');
   }
 }
