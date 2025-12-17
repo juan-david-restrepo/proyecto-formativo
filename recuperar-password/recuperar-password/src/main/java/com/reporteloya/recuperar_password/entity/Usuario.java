@@ -1,10 +1,14 @@
 package com.reporteloya.recuperar_password.entity;
 
 import jakarta.persistence.*;
+<<<<<<< HEAD
+import lombok.*;
+=======
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+>>>>>>> develop
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +16,45 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+<<<<<<< HEAD
+@Entity
+@Table(name = "usuarios")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Usuario implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
+    private Long id;
+
+    @Column(name = "tipo_documento")
+    private String tipoDocumento;
+
+    @Column(name = "numero_documento")
+    private String numeroDocumento;
+
+    @Column(name = "nombre_completo", nullable = false)
+    private String nombreCompleto;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    // ===== UserDetails =====
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+    }
+
+=======
 @Data // Proporciona Getters, Setters, toString, etc. (Si usa Lombok)
 @Builder // Proporciona el patrón Builder (Si usa Lombok)
 @NoArgsConstructor // Constructor sin argumentos (Necesario por JPA)
@@ -50,12 +93,16 @@ public class Usuario implements UserDetails { // <<-- Implementar UserDetails es
 
     // Spring Security utiliza este método para obtener el nombre de usuario.
     // En nuestro caso, usamos el EMAIL como nombre de usuario.
+>>>>>>> develop
     @Override
     public String getUsername() {
         return email;
     }
 
+<<<<<<< HEAD
+=======
     // El resto de métodos se dejan a 'true' para indicar que la cuenta está activa.
+>>>>>>> develop
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -75,4 +122,8 @@ public class Usuario implements UserDetails { // <<-- Implementar UserDetails es
     public boolean isEnabled() {
         return true;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> develop

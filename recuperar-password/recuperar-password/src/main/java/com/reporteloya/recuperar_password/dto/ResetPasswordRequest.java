@@ -1,9 +1,24 @@
 package com.reporteloya.recuperar_password.dto;
 
+<<<<<<< HEAD
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+=======
+>>>>>>> develop
 public class ResetPasswordRequest {
 
     private String token;
     private String newPassword;
+<<<<<<< HEAD
+}
+=======
 
     public ResetPasswordRequest() {
     }
@@ -29,3 +44,4 @@ public class ResetPasswordRequest {
         this.newPassword = newPassword;
     }
 }
+>>>>>>> develop
