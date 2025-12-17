@@ -41,7 +41,7 @@
     <div class="title" data-aos="fade-down">Módulos y Servicios</div>
     <p data-aos="fade-up">Explora nuestros módulos y descubre todas las funcionalidades que tenemos para ti.</p>
   <div class="modules">
-    <div class="module-link" (click)="openModal('fotoMultas')">
+    <div class="module-link" (click)="openModal('subir-reporte')">
       <div class="module" data-aos="fade-up">
         <div class="icon">
           <div class="layer">
@@ -63,7 +63,7 @@
         <div class="text">Multas</div>
       </div>
     </div>
-    <div class="module-link" (click)="openModal('picoPlaca')">
+    <div class="module-link" (click)="openModal('pico-placa')">
       <div class="module" data-aos="fade-up">
         <div class="icon">
           <div class="layer">
@@ -160,7 +160,7 @@
         <span class="icon">+</span>
       </div>
       <div class="accordion-body">
-        Puedes consultar los días actualizados en la página oficial de la Alcaldía de Armenia.
+        Puedes consultar los días actualizados en en apartado consulta del pico y placa de reportelo ya.
       </div>
     </div>
 
@@ -208,24 +208,39 @@
       <div class="card" *ngIf="selectedSection === 'infracciones'" data-aos="fade-up">
         <h2>Registro de Infracciones</h2>
         <p>Aquí puedes agregar el contenido específico para el registro de infracciones.</p>
-        <div class="image-placeholder"></div>
+
+        <div class="image-container ">
+          <img src="https://www.armenia.gov.co/wp-content/uploads/1/2025/FOTOS_22_DE_ABRIL_/Intercambiador.jpeg">
+        </div>
       </div>
       <div class="card" *ngIf="selectedSection === 'informacionVial'" data-aos="fade-up" data-aos-delay="100">
         <h2>Información vial al alcance de tu mano.</h2>
-        <p>Los ciudadanos pueden consultar el estado de las vías, cierres, desvíos y normativas de tránsito vigentes en Quindío. Mantente informado para planificar tus viajes de manera segura y eficiente.</p>
-        <div class="image-container">
-          </div>
+        <p>
+          Los ciudadanos pueden consultar el estado de las vías, cierres, desvíos
+          y normativas de tránsito vigentes en Quindío.
+        </p>
+
+        <div class="image-container ">
+          <img src="https://cronicadelquindio.com/wp-content/uploads/2019/08/120191208070045.jpg">
+        </div>
       </div>
       <div class="card" *ngIf="selectedSection === 'integracion'" data-aos="fade-up" data-aos-delay="200">
         <h2>Integración con Autoridades</h2>
         <p>Aquí puedes agregar el contenido específico para la integración con autoridades.</p>
-        <div class="image-placeholder"></div>
+
+        <div class="image-container">
+          <img src="https://i0.wp.com/ciudadregion.com/uploads/2025/10/transito-armenia.jpg?resize=780%2C470&ssl=1">
+        </div>
       </div>
       <div class="card" *ngIf="selectedSection === 'notificaciones'" data-aos="fade-up" data-aos-delay="300">
         <h2>Notificaciones en Tiempo Real</h2>
         <p>Aquí puedes agregar el contenido específico para las notificaciones en tiempo real.</p>
-        <div class="image-placeholder"></div>
+
+        <div class="image-container">
+          <img src="https://www.idtq.gov.co/medios/imagenes/Plan_Seguridad_IDTQ.jpg" alt="">
+        </div>
       </div>
+
     </div>
   </div>
 </div>
