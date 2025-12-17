@@ -25,5 +25,9 @@ export const routes: Routes = [
   { path: 'agente', component: Agente },
   { path: 'footer', component: Footer },
   { path: 'soporte', component: Soporte },
+<<<<<<< HEAD
   { path: 'pico-placa', component: PicoPlaca }
+=======
+  { path: 'pico-placa', component: PicoPlaca },
+>>>>>>> develop
 ];
