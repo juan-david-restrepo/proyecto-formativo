@@ -37,12 +37,12 @@
 
 </header>
 
-    <div class="container">
-    <div class="title">Módulos y Servicios</div>
-    <p>Explora nuestros módulos y descubre todas las funcionalidades que tenemos para ti.</p>
+    <div class="container" data-aos="fade-up">
+    <div class="title" data-aos="fade-down">Módulos y Servicios</div>
+    <p data-aos="fade-up">Explora nuestros módulos y descubre todas las funcionalidades que tenemos para ti.</p>
   <div class="modules">
     <div class="module-link" (click)="openModal('fotoMultas')">
-      <div class="module">
+      <div class="module" data-aos="fade-up">
         <div class="icon">
           <div class="layer">
             <span></span><span></span><span></span><span></span><span></span>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="module-link" (click)="openModal('multas')">
-      <div class="module">
+      <div class="module" data-aos="fade-up">
         <div class="icon">
           <div class="layer">
             <span></span><span></span><span></span><span></span><span></span>
@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="module-link" (click)="openModal('picoPlaca')">
-      <div class="module">
+      <div class="module" data-aos="fade-up">
         <div class="icon">
           <div class="layer">
             <span></span><span></span><span></span><span></span><span></span>
@@ -75,7 +75,7 @@
       </div>
     </div>
     <div class="module-link" (click)="openModal('parking')">
-      <div class="module">
+      <div class="module" data-aos="fade-up">
         <div class="icon">
           <div class="layer">
             <span></span><span></span><span></span><span></span><span></span>
@@ -107,7 +107,7 @@
   </div>
 </div>
 <div class="pyp-container">
-  <div class="pyp-left">
+  <div class="pyp-left" data-aos="fade-right">
     <h1>Pico y Placa</h1>
     <h2>Armenia Quindío</h2>
 
@@ -121,9 +121,9 @@
     </button>
   </div>
 
-  <div class="pyp-right">
+  <div class="pyp-right" data-aos="fade-left">
 
-    <div class="accordion">
+    <div class="accordion" data-aos="zoom-in">
       <div class="accordion-header">
         ¿Qué días aplica el pico y placa en Armenia?
         <span class="icon">+</span>
@@ -133,7 +133,7 @@
       </div>
     </div>
 
-    <div class="accordion">
+    <div class="accordion" data-aos="zoom-in" data-aos-delay="100">
       <div class="accordion-header">
         ¿Cuál es el horario de la restricción?
         <span class="icon">+</span>
@@ -143,7 +143,7 @@
       </div>
     </div>
 
-    <div class="accordion">
+    <div class="accordion" data-aos="zoom-in" data-aos-delay="200">
       <div class="accordion-header">
         ¿Existen excepciones al pico y placa?
         <span class="icon">+</span>
@@ -154,7 +154,7 @@
       </div>
     </div>
 
-    <div class="accordion">
+    <div class="accordion"  data-aos="zoom-in" data-aos-delay="300">
       <div class="accordion-header">
         ¿Dónde puedo consultar mi día de pico y placa?
         <span class="icon">+</span>
@@ -164,7 +164,7 @@
       </div>
     </div>
 
-    <div class="accordion">
+    <div class="accordion" data-aos="zoom-in" data-aos-delay="400">
       <div class="accordion-header">
         ¿Qué pasa si no cumplo con el pico y placa?
         <span class="icon">+</span>
@@ -178,14 +178,14 @@
 </div>
 
 
-<div class="main-container">
-  <div class="header-content">
+<div class="main-container" data-aos="fade-up">
+  <div class="header-content" data-aos="fade-down">
     <h1>Plataforma digital para <br><span>Infracciones y Vialidad</span></h1>
     <p>Una solución integral para la gestión de infracciones vehiculares y el acceso a información vial relevante en la región de Quindío. Nuestro objetivo es mejorar la seguridad y la fluidez del tráfico para todos los ciudadanos.</p>
   </div>
 
   <div class="content-section">
-    <div class="sidebar">
+    <div class="sidebar" data-aos="fade-right">
       <div class="sidebar-item" [class.active]="selectedSection === 'infracciones'">
         <div class="icon-placeholder"></div> <h3>Registro de Infracciones</h3>
         <p>Facilita la captura y gestión de infracciones vehiculares de forma eficiente.</p>
@@ -204,24 +204,24 @@
       </div>
     </div>
 
-    <div class="main-content">
-      <div class="card" *ngIf="selectedSection === 'infracciones'">
+    <div class="main-content" data-aos="fade-left">
+      <div class="card" *ngIf="selectedSection === 'infracciones'" data-aos="fade-up">
         <h2>Registro de Infracciones</h2>
         <p>Aquí puedes agregar el contenido específico para el registro de infracciones.</p>
         <div class="image-placeholder"></div>
       </div>
-      <div class="card" *ngIf="selectedSection === 'informacionVial'">
+      <div class="card" *ngIf="selectedSection === 'informacionVial'" data-aos="fade-up" data-aos-delay="100">
         <h2>Información vial al alcance de tu mano.</h2>
         <p>Los ciudadanos pueden consultar el estado de las vías, cierres, desvíos y normativas de tránsito vigentes en Quindío. Mantente informado para planificar tus viajes de manera segura y eficiente.</p>
         <div class="image-container">
           </div>
       </div>
-      <div class="card" *ngIf="selectedSection === 'integracion'">
+      <div class="card" *ngIf="selectedSection === 'integracion'" data-aos="fade-up" data-aos-delay="200">
         <h2>Integración con Autoridades</h2>
         <p>Aquí puedes agregar el contenido específico para la integración con autoridades.</p>
         <div class="image-placeholder"></div>
       </div>
-      <div class="card" *ngIf="selectedSection === 'notificaciones'">
+      <div class="card" *ngIf="selectedSection === 'notificaciones'" data-aos="fade-up" data-aos-delay="300">
         <h2>Notificaciones en Tiempo Real</h2>
         <p>Aquí puedes agregar el contenido específico para las notificaciones en tiempo real.</p>
         <div class="image-placeholder"></div>
@@ -229,4 +229,5 @@
     </div>
   </div>
 </div>
+<app-noticias data-aos="fade-up"></app-noticias>
 <app-footer></app-footer>

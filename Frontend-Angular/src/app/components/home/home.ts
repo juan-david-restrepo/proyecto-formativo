@@ -1,9 +1,13 @@
+import * as AOS from 'aos';
+import 'aos/dist/aos.css';
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Nav } from '../../shared/nav/nav';
 import { Footer } from '../../shared/footer/footer';
 import { interval, Subscription } from 'rxjs';
+import { NoticiasComponent } from '../noticias/noticias';
+
 
 type ModuleKey = 'fotoMultas' | 'multas' | 'picoPlaca' | 'parking';
 
@@ -16,12 +20,13 @@ interface Module {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Nav, Footer, RouterModule],
+  imports: [CommonModule, Nav, Footer, RouterModule, NoticiasComponent],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
 })
 export class Home implements OnInit, OnDestroy, AfterViewInit {
 
+  
   /* ------------------------------------------
      Modal de módulos
   ------------------------------------------- */
@@ -191,6 +196,14 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
 
     });
   });
+  
+  AOS.init({
+    duration: 1100, // duración de la animación
+    once: true,     // solo animar la primera vez
+  });
+
+  // Opcional: recalcular si hay contenido dinámico
+  AOS.refresh();
 }
 
 }

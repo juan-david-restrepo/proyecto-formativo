@@ -11,6 +11,7 @@ import { Footer } from './shared/footer/footer';
 import { Soporte } from './components/soporte/soporte';
 import { PicoPlaca } from './components/pico-placa/pico-placa';
 import { Normas } from './components/normas/normas';
+import { NoticiasComponent } from './components/noticias/noticias';
 
 
 export const routes: Routes = [
@@ -26,4 +27,5 @@ export const routes: Routes = [
   { path: 'footer', component: Footer },
   { path: 'soporte', component: Soporte },
   { path: 'pico-placa', component: PicoPlaca },
+  {path: 'noticias', component: NoticiasComponent}
 ];
