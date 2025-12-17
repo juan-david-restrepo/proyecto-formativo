@@ -56,17 +56,10 @@ public class SecurityConfig {
                                                 // CIUDADANO
                                                 .requestMatchers("/api/ciudadano/**").hasRole("CIUDADANO")
 
-<<<<<<< HEAD
                                                 // // Ejemplo adicional:
                                                 // .requestMatchers(HttpMethod.POST, "/api/products").hasRole("ADMIN")
                                                 // .requestMatchers(HttpMethod.GET, "/api/products")
                                                 // .hasAnyRole("ADMIN", "AGENTE", "CIUDADANO")
-=======
-                                                // Ejemplo adicional:
-                                                .requestMatchers(HttpMethod.POST, "/api/products").hasRole("ADMIN")
-                                                .requestMatchers(HttpMethod.GET, "/api/products")
-                                                .hasAnyRole("ADMIN", "AGENTE", "CIUDADANO")
->>>>>>> develop
 
                                                 // Cualquier otro endpoint requiere autenticación
                                                 .anyRequest().authenticated())

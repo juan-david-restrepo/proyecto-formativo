@@ -1,10 +1,6 @@
 package com.reporteloya.recuperar_password.dto;
 
-<<<<<<< HEAD
 import com.reporteloya.recuperar_password.entity.Role;
-=======
-import com.reporteloya.recuperar_password.entity.Role; // Importar su Enum Role
->>>>>>> develop
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthResponse {
 
-<<<<<<< HEAD
     // Token JWT para el acceso a recursos protegidos
     private String token;
 
@@ -30,16 +25,3 @@ public class AuthResponse {
     @Builder.Default
     private String tokenType = "Bearer";
 }
-=======
-    // CRÍTICO: El token JWT para el acceso a recursos protegidos
-    private String token;
-
-    // Campos adicionales para facilitar la gestión en el Front-end
-    private Long userId; // ID del usuario (para búsquedas rápidas)
-    private String email; // Email del usuario (para mostrar en el perfil)
-    private Role role; // Rol del usuario (para control de acceso en el Front-end)
-
-    // Opcional: El tipo de token (siempre "Bearer" en JWT)
-    private String tokenType = "Bearer";
-}
->>>>>>> develop
