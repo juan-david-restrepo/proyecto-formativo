@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth'; // tu backend
+  private apiUrl = 'http://localhost:8080/api/auth';
+
+  private authState = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
+  authState$ = this.authState.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -18,16 +22,14 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, data);
   }
 
-  // ✅ NUEVO: Detecta si existe token en localStorage
-  isLogged(): boolean {
-    return !!localStorage.getItem('token');
+  // 🔥 Activar sesión
+  setSession(token: string) {
+    localStorage.setItem('token', token);
+    this.authState.next(true);
   }
 
-  // Opcional: cerrar sesión
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('role');
-    localStorage.removeItem('email');
+    localStorage.clear();
+    this.authState.next(false);
   }
 }

@@ -28,11 +28,44 @@ export class Registro {
   ) {
     // Formulario de registro
     this.registroForm = this.fb.group({
-      nombre: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', Validators.required],
+      nombre: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(60),
+          Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)
+        ],
+      ],
+
+      correo: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(80),
+        ],
+      ],
+
+      contrasena: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+        ],
+      ],
+
       tipoDocumento: ['', Validators.required],
-      numeroDocumento: ['', Validators.required],
+
+      numeroDocumento: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d+$/),
+          Validators.minLength(6),
+          Validators.maxLength(10),
+        ],
+      ],
+
       rol: ['Ciudadano', Validators.required],
     });
   }
@@ -65,11 +98,23 @@ export class Registro {
   /** Enviar formulario */
   onSubmit(): void {
     if (this.registroForm.invalid) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Campos incompletos',
-        text: 'Por favor llena todos los campos correctamente.',
-      });
+
+      if (this.registroForm.get('numeroDocumento')?.invalid) {
+        Swal.fire('Documento inválido', 'La cédula debe tener solo números y entre 6 y 10 dígitos.', 'warning');
+        return;
+      }
+
+      if (this.registroForm.get('correo')?.invalid) {
+        Swal.fire('Correo inválido', 'Ingresa un correo electrónico válido.', 'warning');
+        return;
+      }
+
+      if (this.registroForm.get('nombre')?.invalid) {
+        Swal.fire('Nombre inválido', 'El nombre no debe superar los 60 caracteres ni contener números.', 'warning');
+        return;
+      }
+
+      Swal.fire('Formulario inválido', 'Revisa los campos del formulario.', 'warning');
       return;
     }
 
@@ -86,9 +131,16 @@ export class Registro {
     this.authService.register(data).subscribe({
       next: (resp) => {
         // Guardar token e info del usuario
+        // 🔥 Guardar token y activar sesión
         if (resp.token) {
-          localStorage.setItem('authToken', resp.token);
+          localStorage.setItem('token', resp.token);
+          this.authService.setSession(resp.token);
         }
+
+        if (resp.userId) {
+          localStorage.setItem('userId', resp.userId);
+        }
+
 
         if (resp.role) {
           localStorage.setItem('userRole', resp.role);

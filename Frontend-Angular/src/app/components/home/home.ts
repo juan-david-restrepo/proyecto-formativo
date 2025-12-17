@@ -5,7 +5,7 @@ import { Nav } from '../../shared/nav/nav';
 import { Footer } from '../../shared/footer/footer';
 import { interval, Subscription } from 'rxjs';
 
-type ModuleKey = 'fotoMultas' | 'multas' | 'picoPlaca' | 'parking';
+type ModuleKey = 'subir-reporte' | 'multas' | 'pico-placa' | 'parking';
 
 interface Module {
   title: string;
@@ -29,7 +29,7 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
   selectedModule: Module | null = null;
 
   modulesData: Record<ModuleKey, Module> = {
-    fotoMultas: {
+    "subir-reporte": {
       title: 'Reporta una Foto Multa',
       description: 'Sube evidencias de infracciones y contribuye a mejorar la movilidad en tu ciudad.',
       image: 'assets/images/foto_multaslegales_carroya.webp',
@@ -39,7 +39,7 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
       description: 'Revisa fácilmente el estado de tus infracciones de tránsito.',
       image: 'assets/images/multas-de-transito.webp',
     },
-    picoPlaca: {
+    "pico-placa": {
       title: 'Consulta del Pico y Placa',
       description: 'Conoce las restricciones vehiculares vigentes para tu zona.',
       image: 'assets/images/Captura de pantalla 2025-11-13 195849.png',
@@ -54,7 +54,7 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
   constructor(private router: Router) {}
 
   openModal(moduleKey: ModuleKey) {
-    const isLoggedIn = localStorage.getItem('user') !== null;
+    const isLoggedIn = localStorage.getItem('userId') !== null;
 
     if (!isLoggedIn) {
       this.selectedModule = this.modulesData[moduleKey];
@@ -127,8 +127,8 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
       image: 'assets/images/secundario.png',
       text: `"Reporta infracciones fácilmente.<br>
               Solo sube una foto o video."`,
-      buttonText: 'Ver',
-      buttonLink: '/estadisticas',
+      buttonText: 'Subir reporte',
+      buttonLink: '/subir-reporte',
     },
     {
       image: 'assets/images/Armenia.webp',
@@ -192,5 +192,7 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
     });
   });
 }
+
+
 
 }
